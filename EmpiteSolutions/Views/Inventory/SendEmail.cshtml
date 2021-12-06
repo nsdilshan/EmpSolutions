@@ -1,0 +1,13 @@
+﻿@model EmpiteSolutions.Models.SendEmailViewModel
+
+@{
+    ViewData["Title"] = "SendEmail";
+}
+
+<div id="app">
+    <send-mail-component send-mail-url="@Url.Action("SendEmail", "Inventory")"></send-mail-component>
+</div>
+
+@section Scripts {
+    <script src="@Url.Content("~/bundle/Inventory.js")"></script>
+}

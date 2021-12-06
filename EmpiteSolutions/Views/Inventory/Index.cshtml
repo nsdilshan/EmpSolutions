@@ -1,0 +1,34 @@
+﻿@model IEnumerable<EmpiteSolutions.Models.InventoryViewModel>
+@using Newtonsoft.Json;
+
+@{
+    ViewData["Title"] = "Index";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+{
+    <div class="row">
+        <a class="btn btn-primary" asp-action="Create" asp-controller="Inventory">Create New Item</a>
+    </div>
+}
+
+<div id="app">
+    <index-component create-product-url="@Url.Action("Create")" delete-url="@Url.Action("Delete")"
+                     edit-url="@Url.Action("Edit")" details-url="@Url.Action("Details")"
+                     :products="@JsonConvert.SerializeObject(Model)"
+                     :HasPermission="@User.IsInRole("Manager")">
+    </index-component>
+</div>
+
+
+@if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+{
+    <div class="row">
+        <a class="btn btn-primary" asp-action="SendEmail" asp-controller="Inventory">Send Inventory Summary Email</a>
+    </div>
+}
+
+@section Scripts {
+    <script src="@Url.Content("~/bundle/Inventory.js")"></script>
+}
